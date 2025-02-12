@@ -3,8 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$baseDir = __DIR__ . '/../src/';
+$baseDir = __DIR__ . '/../Database/';
 session_start();
+
+require_once $baseDir . 'database.php';
+$pdo = Database::getInstance();
 
 $do = 'home';
 $action = null;
