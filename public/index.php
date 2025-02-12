@@ -13,13 +13,27 @@ if (isset($_GET['do'])) {
     $do = $_GET['do'];
 }
 
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+}
+
 switch ($do) {
-    case 'home':  // Afficher la page d'accueil
+    case 'home': 
         require $baseDir . 'Controllers/HomeController.php';
         $homeController = new homeController();
         $homeController->index();
         break;
-    case 'create':
-        require $baseDir . 'Views/create.php';
+    case 'page':
+        require $baseDir . 'Controllers/PageController.php';
+        $controller = new PageController();
+        if ($action === 'delete') {
+            $controller->delete();
+        } elseif ($action === 'edit') {
+            $controller->edit();
+        } elseif ($action === 'create') {
+            $controller->create();
+        } else {
+            $controller->pagesList();
+        }
         break;
 }

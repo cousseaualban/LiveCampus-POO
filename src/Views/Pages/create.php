@@ -2,7 +2,7 @@
 $title = "Création de page";
 ob_start();
 ?>
-<form action="createPage.php" method="POST">
+<form action="?do=page&action=create" method="POST">
     <label>Nom de la page :</label>
     <input type="text" name="title" required>
     
@@ -14,6 +14,7 @@ ob_start();
     
     <button type="submit">Enregistrer</button>
 </form>
+<a href="?do=page">Retour à la liste</a>
 
 <?php 
 $content = ob_get_clean();

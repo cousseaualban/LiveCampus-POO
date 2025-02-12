@@ -14,7 +14,7 @@ $title = $title ?? "Accueil";
         <h1><?= htmlspecialchars($title)?></h1>
         <nav>
             <a href="?do=home">Accueil</a>
-            <a href="?do=create">Créer Page</a>
+            <a href="?do=page">Pages</a>
         </nav>
     </header>   
     
