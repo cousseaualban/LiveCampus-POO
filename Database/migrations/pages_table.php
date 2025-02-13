@@ -16,7 +16,7 @@ class pages_table {
                 title VARCHAR(100) NOT NULL,
                 url VARCHAR(191) UNIQUE NOT NULL,
                 content TEXT NOT NULL,
-                user_id INT NOT NULL,
+                user_id CHAR(36) DEFAULT (UUID()) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at DATE NULL,
                 CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE
