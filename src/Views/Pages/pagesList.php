@@ -32,5 +32,5 @@ ob_start();
 <a href="?do=page&action=create">Créer une nouvelle page</a>
 <?php 
 $content = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projet-POO/src/Views/home.php';
 ?>
