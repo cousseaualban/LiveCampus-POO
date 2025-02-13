@@ -12,7 +12,7 @@ class users_table {
             DROP TABLE IF EXISTS users_table;
 
             CREATE TABLE users_table (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id CHAR(36) PRIMARY KEY DEFAULT (UUID()), 
                 name VARCHAR(100) NOT NULL,
                 email VARCHAR(191) UNIQUE NOT NULL,
                 password VARCHAR(100) NOT NULL,
