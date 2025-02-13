@@ -12,7 +12,7 @@ class pages_table {
             DROP TABLE IF EXISTS page_table;
 
             CREATE TABLE page_table (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id CHAR(36) PRIMARY KEY DEFAULT (UUID()), 
                 title VARCHAR(100) NOT NULL,
                 url VARCHAR(191) UNIQUE NOT NULL,
                 content TEXT NOT NULL,
