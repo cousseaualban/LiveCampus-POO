@@ -1,4 +1,9 @@
 <?php
+namespace App\Database;
+use PDO;
+use PDOException;
+use Exception;
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -8,6 +13,7 @@ class Database {
     private $db = 'mysql:host=localhost;dbname=poo;charset=utf8mb4';
     private $username = 'root';
     private $pwd = '';
+
     private function __construct() {
         try {
             $this->pdo = new PDO($this->db, $this->username, $this->pwd);

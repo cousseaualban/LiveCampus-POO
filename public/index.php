@@ -3,11 +3,20 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$baseDir = __DIR__ . '/../Database/';
 session_start();
 
-require_once $baseDir . 'database.php';
-$pdo = Database::getInstance();
+// Chemin de base
+$baseDir = __DIR__ . '/../';
+
+// Inclure manuellement tous les fichiers nécessaires
+require_once $baseDir . 'Database/Database.php';
+require_once $baseDir . 'src/Models/Page.php';
+require_once $baseDir . 'src/Controllers/HomeController.php';
+require_once $baseDir . 'src/Controllers/PageController.php';
+
+// Utilisation des namespaces
+use App\Controllers\HomeController;
+use App\Controllers\PageController;
 
 $do = 'home';
 $action = null;
@@ -22,12 +31,11 @@ if (isset($_GET['action'])) {
 
 switch ($do) {
     case 'home': 
-        require $baseDir . 'Controllers/HomeController.php';
-        $homeController = new homeController();
+        $homeController = new HomeController();
         $homeController->index();
         break;
+
     case 'page':
-        require $baseDir . 'Controllers/PageController.php';
         $controller = new PageController();
         if ($action === 'delete') {
             $controller->delete();
@@ -35,8 +43,14 @@ switch ($do) {
             $controller->edit();
         } elseif ($action === 'create') {
             $controller->create();
+        } elseif ($action === 'show') {
+            $controller->show();
         } else {
             $controller->pagesList();
         }
+        break;
+
+    default:
+        echo "Page introuvable";
         break;
 }
