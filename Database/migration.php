@@ -29,7 +29,7 @@ class Migration {
                 return;
             }
         }
-        echo "No next migration available.\n";
+        echo "Aucune autre migration disponible.\n";
     }
 
     public function previous(): void {
