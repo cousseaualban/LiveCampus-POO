@@ -1,4 +1,5 @@
 <?php
+use App\Database\Database;
 
 class users_table {
     private PDO $db;

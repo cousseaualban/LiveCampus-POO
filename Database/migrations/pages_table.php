@@ -1,4 +1,5 @@
 <?php
+use App\Database\Database;
 
 class pages_table {
     private PDO $db;

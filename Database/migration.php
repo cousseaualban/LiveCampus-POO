@@ -1,6 +1,7 @@
 <?php
 
 require_once 'database.php';
+use App\Database\Database;
 
 class Migration {
     private PDO $db;

@@ -17,7 +17,7 @@ class Page {
     // Récupérer toutes les pages 
     public function getAllPages()
     {
-        $stmt = $this->db->query("SELECT * FROM page");
+        $stmt = $this->db->query("SELECT * FROM page_table");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -26,7 +26,7 @@ class Page {
     public function getPageById(string $id)
     {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM page WHERE id = :id");
+            $stmt = $this->db->prepare("SELECT * FROM page_table WHERE id = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_STR);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -40,8 +40,8 @@ class Page {
     {
         try {
             $query = "
-                INSERT INTO page (id, title, url, content, user, created_at, updated_at)
-                VALUES (:id, :title, :url, :content, :user, :created_at, :updated_at)
+                INSERT INTO page_table (id, title, url, content, user_id, created_at, updated_at)
+                VALUES (:id, :title, :url, :content, :user_id, :created_at, :updated_at)
             ";
             $stmt = $this->db->prepare($query);
             $dateTime = new DateTime(); 
@@ -53,7 +53,7 @@ class Page {
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':url', $url, PDO::PARAM_STR);
             $stmt->bindParam(':content', $content);
-            $stmt->bindParam(':user', $user);
+            $stmt->bindParam(':user_id', $user);
             $stmt->bindParam(':created_at', $createdAt); 
             $stmt->bindParam(':updated_at', $updatedAt); 
 
@@ -69,8 +69,8 @@ class Page {
     {
         try {
             $query = "
-                UPDATE page 
-                SET title = :title, url = :url, content = :content, user = :user, updated_at = :updated_at
+                UPDATE page_table 
+                SET title = :title, url = :url, content = :content, user_id = :user_id, updated_at = :updated_at
                 WHERE id = :id
             ";
             $stmt = $this->db->prepare($query);
@@ -79,7 +79,7 @@ class Page {
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':url', $url, PDO::PARAM_STR);
             $stmt->bindParam(':content', $content);
-            $stmt->bindParam(':user', $user);
+            $stmt->bindParam(':user_id', $user);
             $stmt->bindParam(':updated_at', $updatedAt);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -91,7 +91,7 @@ class Page {
     public function deletePage(string $id)
     {
         try {
-            $stmt = $this->db->prepare("DELETE FROM page WHERE id = :id");
+            $stmt = $this->db->prepare("DELETE FROM page_table WHERE id = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_STR);
             $stmt->execute();
         } catch (PDOException $e) {

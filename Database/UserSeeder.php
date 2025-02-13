@@ -1,6 +1,7 @@
 <?php
 
 require_once 'database.php';
+use App\Database\Database;
 
 if ($argc !== 5) {
     die("Création d'un utilisateur : php UserSeeder.php <name> <email> <password> <role>\n");
