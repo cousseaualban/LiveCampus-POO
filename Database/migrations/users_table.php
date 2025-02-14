@@ -1,7 +1,7 @@
 <?php
 use App\Database\Database;
 
-class users_table {
+class Users_table {
     private PDO $db;
 
     public function __construct() {
