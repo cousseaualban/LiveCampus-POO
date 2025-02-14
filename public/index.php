@@ -29,7 +29,7 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-if (!isset($_SESSION['user']) && $do !== 'page' && $do !== 'home') {
+if (!isset($_SESSION['user']) && $do !== 'page' && $do !== 'home' && $do !== 'auth') {
     header('Location: index.php?do=home');
 }
 

@@ -19,7 +19,7 @@ $title = $title ?? "Accueil";
         <div>
         <?php if (isset($_SESSION['user'])) :?>
             <a href="?do=auth&action=logout">Se déconnecter</a>
-        <?php else : ?>
+        <?php elseif (!isset($_SESSION['user']) && (!isset($_GET['do']) || $_GET['do'] !== 'auth')) : ?>
             <a href="?do=auth" class="nav-link">Se connecter</a>
         <?php endif; ?>
         <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") :?>
