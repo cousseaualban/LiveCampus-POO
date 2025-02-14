@@ -29,11 +29,9 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-if (!isset($_SESSION['user']) && $do !== 'home') {
+if (!isset($_SESSION['user']) && $do !== 'page' && $do !== 'home') {
     header('Location: index.php?do=home');
 }
-
-
 
 switch ($do) {
     case 'home':
