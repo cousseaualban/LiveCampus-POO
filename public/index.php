@@ -28,6 +28,10 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
 }
 
+if (!isset($_SESSION['user']) && $do !== 'auth') {
+    header('Location: index.php?do=auth');
+}
+
 switch ($do) {
     case 'home':
         $homeController = new HomeController();

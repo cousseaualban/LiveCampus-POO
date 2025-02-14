@@ -1,6 +1,7 @@
 <?php 
 $title = $subtitle = "Liste des pages";
 ob_start();
+var_dump($_SESSION['user']);
 ?>
 <table>
     <thead>
@@ -19,10 +20,16 @@ ob_start();
                         <?= htmlspecialchars($page['title']) ?>
                     </a>
                 </td>
+            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
                 <td>
                     <a href="?do=page&action=edit&id=<?= $page['id'] ?>">Modifier</a>
                     <a href="?do=page&action=delete&id=<?= $page['id'] ?>" onclick="return confirm('Supprimer cette page ?');">Supprimer</a>
                 </td>
+            <?php else:?>
+                    <td>
+                        <a href="?do=page&action=edit&id=<?= $page['id'] ?>">Modifier</a>
+                    </td>
+            <?php endif; ?>
                 <td><p><?= $page['created_at']?></p></td>
                 <td><p><?= $page['updated_at']?></p></td>
             </tr>

@@ -49,13 +49,13 @@ class PageController
             "footerContent" => $structure['footer'],
         ]);
 
+        $userId = $_SESSION['user']['id'];
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $title = filter_input(INPUT_POST, 'title');
             $url = filter_input(INPUT_POST, 'url');
             $content = filter_input(INPUT_POST, 'content');
-            $user = filter_input(INPUT_POST, 'user');
-            if (!empty($title) && !empty($url) && !empty($content) && !empty($user)) {
-                $this->pageModel->createPage($title, $url, $content, $user);
+            if (!empty($title) && !empty($url) && !empty($content)) {
+                $this->pageModel->createPage($title, $url, $content, $userId);
                 header("Location: ?do=page");
             } else {
                 echo "Remplissez correctement les champs";
@@ -70,17 +70,18 @@ class PageController
             echo "Page introuvable";
             return; 
         }
+        var_dump($_SESSION['user']  ['id']);
+        $userId = $_SESSION['user']['id'];
 
-        
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $id = filter_input(INPUT_POST, 'id');
             $title = filter_input(INPUT_POST, 'title');
             $url = filter_input(INPUT_POST, 'url');
             $content = filter_input(INPUT_POST, 'content');
-            $user = filter_input(INPUT_POST, 'user');
+            // $user = filter_input(INPUT_POST, 'user');
 
-            if (!empty($title) && !empty($url) && !empty($content) && !empty($user)) {
-                $this->pageModel->updatePage($id, $title, $url, $content, $user);
+            if (!empty($title) && !empty($url) && !empty($content)) {
+                $this->pageModel->updatePage($id, $title, $url, $content, $userId);
                 header("Location: ?do=page");
             } else {
                 echo "Remplissez correctement les champs";

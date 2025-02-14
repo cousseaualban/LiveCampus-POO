@@ -15,9 +15,6 @@ ob_start();
     <label for="content">Contenu :</label>
     <textarea id="content" name="content" rows="5"><?= htmlspecialchars($page['content']) ?></textarea>
 
-    <label for="user">Utilisateur :</label>
-    <input type="text" id="user" name="user" value="<?= htmlspecialchars($page['user_id']) ?>" required>
-
     <button type="submit">Modifier</button>
 </form>
 <a href="?do=page">Retour à la liste</a>

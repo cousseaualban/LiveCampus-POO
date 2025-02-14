@@ -35,7 +35,7 @@ class Page {
     }
 
     // Créer une nouvelle page
-    public function createPage(string $title, string $url, $content, $user)
+    public function createPage(string $title, string $url, $content, string $user)
     {
         try {
             $query = "
@@ -64,7 +64,7 @@ class Page {
 
 
     // Modifier la page
-    public function updatePage(string $id, string $title, string $url, $content, $user)
+    public function updatePage(string $id, string $title, string $url, $content, string $user)
     {
         try {
             $query = "

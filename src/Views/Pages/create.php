@@ -12,8 +12,8 @@ ob_start();
     <label>Contenu (HTML) :</label>
     <textarea name="content" rows="10" cols="50" placeholder="Écrivez votre HTML ici..."></textarea>
 
-    <label>Utilisateur :</label>
-    <input type="text" name="user" required>
+    <!-- <label>Utilisateur :</label>
+    <input type="text" name="user" required> -->
     
     <button type="submit">Enregistrer</button>
 </form>
