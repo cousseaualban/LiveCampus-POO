@@ -33,6 +33,17 @@ class Page {
             die("Erreur lors de la récupération de la page : " . $e->getMessage());
         }
     }
+    public function getPageByUserId(string $userId)
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM page_table WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die("Erreur lors de la récupération de la page : " . $e->getMessage());
+        }
+    }
 
     // Créer une nouvelle page
     public function createPage(string $title, string $url, $content, string $user)

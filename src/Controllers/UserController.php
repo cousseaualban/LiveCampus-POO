@@ -9,11 +9,13 @@ class UserController
 {
     private $userModel; 
     private $structureModel;
+    private $pageModel;
 
     public function __construct()
     {
         $this->userModel = new User();
         $this->structureModel = new Structure();
+        $this->pageModel = new Page();
         
     }
     public function userList()
@@ -30,6 +32,10 @@ class UserController
     {
         if (isset($_GET['id'])){
             $this->userModel->deleteUser($_GET['id']);
+            $pages = $this->pageModel->getPageByUserId($_GET['id']);
+            foreach($pages as $page){
+                $this->pageModel->updatePage($page['id'], $page['title'], $page['url'], $page['content'], $_SESSION['user']['id']);
+            }
             header("Location: ?do=user");
             exit;
         } else {
