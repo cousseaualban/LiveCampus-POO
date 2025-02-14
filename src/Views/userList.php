@@ -26,5 +26,5 @@ ob_start();
 </table>
 <?php
 $content = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projet-Poo/src/Views/home.php';
 ?>
