@@ -9,6 +9,7 @@ session_start();
 $baseDir = __DIR__ . '/../';
 
 require_once $baseDir . './vendor/autoload.php';
+
 use App\Controllers\HomeController;
 use App\Controllers\StructureController;
 use App\Controllers\PageController;
@@ -40,10 +41,10 @@ switch ($do) {
             $controller->login($name, $password);
         } elseif ($action === 'logout') {
             $controller->logout();
-        } 
+        }
         break;
 
-        case 'page':
+    case 'page':
         $controller = new PageController();
         if ($action === 'delete') {
             $controller->delete();
@@ -61,7 +62,7 @@ switch ($do) {
         $controller = new StructureController();
         $controller->index();
         break;
-        
+
     default:
         echo "Page introuvable";
         break;
