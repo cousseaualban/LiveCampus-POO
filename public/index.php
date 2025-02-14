@@ -9,7 +9,6 @@ session_start();
 $baseDir = __DIR__ . '/../';
 
 require_once $baseDir . './vendor/autoload.php';
-
 use App\Controllers\HomeController;
 use App\Controllers\StructureController;
 use App\Controllers\PageController;

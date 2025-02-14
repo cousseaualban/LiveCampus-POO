@@ -11,9 +11,6 @@ ob_start();
     
     <label>Contenu (HTML) :</label>
     <textarea name="content" rows="10" cols="50" placeholder="Écrivez votre HTML ici..."></textarea>
-
-    <!-- <label>Utilisateur :</label>
-    <input type="text" name="user" required> -->
     
     <button type="submit">Enregistrer</button>
 </form>
@@ -21,7 +18,7 @@ ob_start();
 
 <?php 
 $content = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projet-POO/src/Views/home.php';
 ?>
 
 
