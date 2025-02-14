@@ -70,7 +70,6 @@ class PageController
             echo "Page introuvable";
             return; 
         }
-        var_dump($_SESSION['user']  ['id']);
         $userId = $_SESSION['user']['id'];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){

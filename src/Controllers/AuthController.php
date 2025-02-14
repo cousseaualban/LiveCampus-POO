@@ -12,8 +12,10 @@ class AuthController
     {
         $this->pdo = $pdo;
     }
-    public function login($name, $password)
+    public function login()
     {
+        $name = $_POST['name'];
+        $password = $_POST['password'];
         if (empty($name) || empty($password)) {
             echo "Tous les champs sont obligatoires.";
             return;
@@ -39,5 +41,12 @@ class AuthController
         } else {
             echo "Aucun utilisateur trouvé avec ce nom.";
         }
+    }
+
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        header('Location: index.php?do=home');
     }
 }

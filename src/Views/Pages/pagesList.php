@@ -1,7 +1,6 @@
 <?php 
 $title = $subtitle = "Liste des pages";
 ob_start();
-var_dump($_SESSION['user']);
 ?>
 <table>
     <thead>
@@ -20,12 +19,12 @@ var_dump($_SESSION['user']);
                         <?= htmlspecialchars($page['title']) ?>
                     </a>
                 </td>
-            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
                 <td>
                     <a href="?do=page&action=edit&id=<?= $page['id'] ?>">Modifier</a>
                     <a href="?do=page&action=delete&id=<?= $page['id'] ?>" onclick="return confirm('Supprimer cette page ?');">Supprimer</a>
                 </td>
-            <?php else:?>
+            <?php elseif (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'standard'):?>
                     <td>
                         <a href="?do=page&action=edit&id=<?= $page['id'] ?>">Modifier</a>
                     </td>
@@ -36,8 +35,9 @@ var_dump($_SESSION['user']);
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php if (isset($_SESSION['user'])) : ?> 
 <a href="?do=page&action=create">Créer une nouvelle page</a>
-<?php 
+<?php endif; 
 $content = ob_get_clean();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.php';
 ?>

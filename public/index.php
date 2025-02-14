@@ -9,6 +9,7 @@ session_start();
 $baseDir = __DIR__ . '/../';
 
 require_once $baseDir . './vendor/autoload.php';
+
 use App\Controllers\HomeController;
 use App\Controllers\StructureController;
 use App\Controllers\PageController;
@@ -28,26 +29,27 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
 }
 
-if (!isset($_SESSION['user']) && $do !== 'auth') {
-    header('Location: index.php?do=auth');
+if (!isset($_SESSION['user']) && $do !== 'home') {
+    header('Location: index.php?do=home');
 }
+
+
 
 switch ($do) {
     case 'home':
         $homeController = new HomeController();
         $homeController->index();
         break;
-
+        
     case 'auth':
         $controller = new AuthController($pdo);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $controller->login($name, $password);   
-        } else {
-            require $baseDir . 'src/Views/auth.php';
+        if ($action === 'login') {
+            $controller->login();
+        } elseif ($action === 'logout') {
+            $controller->logout();
         }
-        break;
+        require_once $baseDir . './src/Views/auth.php';
+    break;
 
     case 'page':
         $controller = new PageController();
@@ -67,7 +69,7 @@ switch ($do) {
         $controller = new StructureController();
         $controller->index();
         break;
-        
+
     default:
         echo "Page introuvable";
         break;
