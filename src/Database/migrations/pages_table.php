@@ -1,7 +1,7 @@
 <?php
 use App\Database\Database;
 
-class pages_table {
+class Pages_table {
     private PDO $db;
 
     public function __construct() {

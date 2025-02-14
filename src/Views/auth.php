@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="./css/auth.css" type="text/css" />
-</head>
-<body>
+<?php 
+$title = "Connexion";
+ob_start();
+?>
     <div class="container">
         <h2>Connexion</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Nom d'utilisateur *" required>
-            <input type="password" id="password" placeholder="Mot de passe *" required>
+        <form id="loginForm" action="?do=auth" method="POST">
+            <input type="text" id="name" name="name" placeholder="Nom d'utilisateur * " required>
+            <input type="password" id="password" name="password" placeholder="Mot de passe *" required>
             <button type="submit">Se connecter</button>
         </form>
     </div>
-</body>
-</html>
+<?php 
+$content = ob_get_clean();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.php';
+?>
