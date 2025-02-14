@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\Page;
-use App\Models\Structure; // Assure-toi que le modèle Structure est bien inclus
+use App\Models\Structure;
 
 class PageController
 {
@@ -12,7 +12,7 @@ class PageController
     public function __construct()
     {
         $this->pageModel = new Page();
-        $this->structureModel = new Structure(); // Instanciation du modèle Structure
+        $this->structureModel = new Structure();
     }
 
     // Affiche toutes les pages
@@ -77,7 +77,6 @@ class PageController
             $title = filter_input(INPUT_POST, 'title');
             $url = filter_input(INPUT_POST, 'url');
             $content = filter_input(INPUT_POST, 'content');
-            // $user = filter_input(INPUT_POST, 'user');
 
             if (!empty($title) && !empty($url) && !empty($content)) {
                 $this->pageModel->updatePage($id, $title, $url, $content, $userId);
