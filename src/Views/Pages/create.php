@@ -22,4 +22,3 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.
 ?>
 
 
-

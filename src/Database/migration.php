@@ -1,18 +1,29 @@
 <?php
 
 require_once 'database.php';
+
 use App\Database\Database;
+use PDO;
 
-class Migration {
+class Migration
+{
     private PDO $db;
-    private string $migrationsDir = __DIR__ . '/migrations/';
+    private string $migrationsDir = __DIR__ . '/migrations/'; // Répertoire contenant les fichiers de migration
 
-    public function __construct(){
+    /**
+     * Constructeur : Initialise la connexion et s'assure que la table des migrations existe
+     */
+    public function __construct()
+    {
         $this->db = Database::getInstance();
         $this->ensureMigrationTable();
     }
 
-    public function migrate(): void {
+    /**
+     * Exécute toutes les migrations disponibles dans le dossier `migrations`
+     */
+    public function migrate(): void
+    {
         $files = glob($this->migrationsDir . '*.php');
         foreach ($files as $file) {
             $this->executeMigration($file);
@@ -20,7 +31,11 @@ class Migration {
         echo "Toutes les migrations ont été appliquées.\n";
     }
 
-    public function next(): void {
+    /**
+     * Applique uniquement la prochaine migration qui n'a pas encore été exécutée
+     */
+    public function next(): void
+    {
         $files = glob($this->migrationsDir . '*.php');
         $lastMigration = $this->getLastMigration();
         foreach ($files as $file) {
@@ -33,7 +48,11 @@ class Migration {
         echo "Aucune autre migration disponible.\n";
     }
 
-    public function previous(): void {
+    /**
+     * Annule la dernière migration exécutée
+     */
+    public function previous(): void
+    {
         $lastMigration = $this->getLastMigration();
         if ($lastMigration) {
             require_once $this->migrationsDir . "$lastMigration.php";
@@ -47,7 +66,11 @@ class Migration {
         }
     }
 
-    public function reset(): void {
+    /**
+     * Annule toutes les migrations appliquées et réinitialise la table `migrations`
+     */
+    public function reset(): void
+    {
         $files = array_reverse(glob($this->migrationsDir . '*.php'));
         foreach ($files as $file) {
             require_once $file;
@@ -56,24 +79,36 @@ class Migration {
             $migration->down();
             $this->db->exec("DELETE FROM migrations WHERE migration = '$className'");
         }
-        $this->db->exec("ALTER TABLE migrations AUTO_INCREMENT = 1;");
+        $this->db->exec("ALTER TABLE migrations AUTO_INCREMENT = 1;"); // Réinitialise l'auto-incrémentation
         echo "Toutes les migrations ont été annulées.\n";
     }
 
-    private function executeMigration(string $file): void {
+    /**
+     * Exécute une migration spécifique
+     */
+    private function executeMigration(string $file): void
+    {
         require_once $file;
         $className = basename($file, '.php');
         $migration = new $className();
-        $migration->up();
+        $migration->up(); // Exécute la migration
         $this->db->exec("INSERT INTO migrations (migration) VALUES ('$className')");
     }
 
-    private function getLastMigration(): ?string {
+    /**
+     * Récupère la dernière migration appliquée
+     */
+    private function getLastMigration(): ?string
+    {
         $stmt = $this->db->query("SELECT migration FROM migrations ORDER BY id DESC LIMIT 1");
         return $stmt->fetchColumn() ?: null;
     }
 
-    private function ensureMigrationTable(): void {
+    /**
+     * Vérifie si la table `migrations` existe, sinon la crée
+     */
+    private function ensureMigrationTable(): void
+    {
         $this->db->exec("CREATE TABLE IF NOT EXISTS migrations (
             id INT AUTO_INCREMENT PRIMARY KEY,
             migration VARCHAR(255) NOT NULL,
@@ -85,22 +120,21 @@ class Migration {
 $command = $argv[1] ?? null;
 $migration = new Migration();
 
+// Exécution de la commande en fonction de l'argument reçu
 switch ($command) {
-case 'migrate':
-    $migration->migrate();
-    break;
-case 'next':
-    $migration->next();
-    break;
-case 'previous':
-    $migration->previous();
-    break;
-case 'reset':
-    $migration->reset();
-    break;
-default:
-    echo "Commande inconnue. Utilisez migrate, next, previous, or reset.\n";
-    break;
+    case 'migrate':
+        $migration->migrate();
+        break;
+    case 'next':
+        $migration->next();
+        break;
+    case 'previous':
+        $migration->previous();
+        break;
+    case 'reset':
+        $migration->reset();
+        break;
+    default:
+        echo "Commande inconnue. Utilisez migrate, next, previous, or reset.\n";
+        break;
 }
-
-?>
