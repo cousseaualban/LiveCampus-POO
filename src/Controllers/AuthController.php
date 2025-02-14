@@ -47,6 +47,6 @@ class AuthController
     {
         session_unset();
         session_destroy();
-        header('Location: index.php?do=home');
+        header('Location: index.php?do=auth');
     }
 }

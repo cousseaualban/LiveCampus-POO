@@ -9,7 +9,6 @@ session_start();
 $baseDir = __DIR__ . '/../';
 
 require_once $baseDir . './vendor/autoload.php';
-
 use App\Controllers\HomeController;
 use App\Controllers\StructureController;
 use App\Controllers\PageController;
@@ -28,11 +27,6 @@ if (isset($_GET['do'])) {
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 }
-
-if (!isset($_SESSION['user']) && $do !== 'home') {
-    header('Location: index.php?do=home');
-}
-
 
 
 switch ($do) {

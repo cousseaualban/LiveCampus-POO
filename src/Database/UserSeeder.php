@@ -17,6 +17,10 @@ if (!in_array($role, $validRoles)) {
     die("Erreur : Le rôle à saisir doit être 'admin' ou 'standard'.\n");
 }
 
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $password)) {
+    die("Erreur : Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.\n");
+}
+
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 try {
