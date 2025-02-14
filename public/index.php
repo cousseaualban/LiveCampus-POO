@@ -36,16 +36,14 @@ switch ($do) {
 
     case 'auth':
         $controller = new AuthController($pdo);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $controller->login($name, $password);   
-        } else {
-            require $baseDir . 'src/Views/auth.php';
-        }
+        if ($action === 'login') {
+            $controller->login($name, $password);
+        } elseif ($action === 'logout') {
+            $controller->logout();
+        } 
         break;
 
-    case 'page':
+        case 'page':
         $controller = new PageController();
         if ($action === 'delete') {
             $controller->delete();
