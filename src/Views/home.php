@@ -24,6 +24,7 @@ $title = $title ?? "Accueil";
         <?php endif; ?>
         <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") :?>
             <a href="?do=structure" class="nav-link">Structure</a>
+            <a href="?do=user" class="nav-link">Utilisateurs</a>
         <?php endif; ?>
         </div>
         <?= $content ?? '' ?>

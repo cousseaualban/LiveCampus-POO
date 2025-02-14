@@ -11,5 +11,5 @@ ob_start();
     </div>
     <?php 
 $content = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Projet-POO/src/Views/home.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/projet/LIVECAMPUS-POO/src/Views/home.php';
 ?>

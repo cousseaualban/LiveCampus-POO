@@ -13,6 +13,7 @@ use App\Controllers\HomeController;
 use App\Controllers\StructureController;
 use App\Controllers\PageController;
 use App\Controllers\AuthController;
+use App\Controllers\UserController;
 use App\Database\Database;
 
 $do = 'home';
@@ -65,6 +66,14 @@ switch ($do) {
     case 'structure':
         $controller = new StructureController();
         $controller->index();
+        break;
+    case 'user':
+        $controller = new UserController();
+        if ($action === 'delete') {
+            $controller->delete();
+        } else {
+            $controller->userList();
+        }
         break;
 
     default:
