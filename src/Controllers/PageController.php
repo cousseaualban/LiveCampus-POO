@@ -1,25 +1,30 @@
 <?php
-// require_once __DIR__ . '/../Models/Page.php';
 namespace App\Controllers;
+
 use App\Models\Page;
+use App\Models\Structure; // Assure-toi que le modèle Structure est bien inclus
 
 class PageController
 {
     private $pageModel; 
+    private $structureModel;
 
     public function __construct()
     {
         $this->pageModel = new Page();
+        $this->structureModel = new Structure(); // Instanciation du modèle Structure
     }
 
-    //Affiche toutes les pages
+    // Affiche toutes les pages
     public function pagesList()
     {
+        $structure = $this->structureModel->getStructure();
         return $this->render("pagesList", [
             "pages" => $this->pageModel->getAllPages(),
+            "headerContent" => $structure['header'], 
+            "footerContent" => $structure['footer'],
         ]);
     }
-
     // Afficher une page 
     public function show()
     {
@@ -81,6 +86,7 @@ class PageController
         ]);
     }
 
+    // Supprimer une page
     public function delete()
     {
         if (isset($_GET['id'])){

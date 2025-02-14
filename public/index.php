@@ -5,17 +5,11 @@ error_reporting(E_ALL);
 
 session_start();
 
-// Chemin de base
 $baseDir = __DIR__ . '/../';
+require_once $baseDir . './vendor/autoload.php';
 
-// Inclure manuellement tous les fichiers nécessaires
-require_once $baseDir . 'Database/Database.php';
-require_once $baseDir . 'src/Models/Page.php';
-require_once $baseDir . 'src/Controllers/HomeController.php';
-require_once $baseDir . 'src/Controllers/PageController.php';
-
-// Utilisation des namespaces
 use App\Controllers\HomeController;
+use App\Controllers\StructureController;
 use App\Controllers\PageController;
 
 $do = 'home';
@@ -49,7 +43,11 @@ switch ($do) {
             $controller->pagesList();
         }
         break;
-
+    case 'structure':
+        $controller = new StructureController();
+        $controller->index();
+        break;
+        
     default:
         echo "Page introuvable";
         break;

@@ -1,5 +1,4 @@
 <?php
-// require_once __DIR__ . '/../../Database/database.php';
 namespace App\Models;
 use App\Database\Database;
 use PDO;
@@ -98,7 +97,8 @@ class Page {
             die("Erreur lors de la suppression de la page : " . $e->getMessage());
         }
     }
-        // Générer un UUID
+    
+    // Générer un UUID
     private function genererUuid()
     {
         return sprintf(

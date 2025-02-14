@@ -1,5 +1,5 @@
 <?php
-$title = "Modifier la page";
+$title ="Modifier page";
 ob_start();
 ?>
 

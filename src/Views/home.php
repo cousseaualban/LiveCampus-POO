@@ -1,4 +1,4 @@
-<?php 
+<?php
 $title = $title ?? "Accueil";
 ?>
 
@@ -7,23 +7,17 @@ $title = $title ?? "Accueil";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiveCampus-POO</title>
-</head>
-<body> 
-    <header>
-        <h1><?= htmlspecialchars($title)?></h1>
-        <nav>
-            <a href="?do=home">Accueil</a>
-            <a href="?do=page">Pages</a>
-        </nav>
-    </header>   
-    
+    <title><?= htmlspecialchars($title) ?></title>
+    <link rel="stylesheet" href="./css/style.css">
+    </head>
+<body>
+    <?= isset($headerContent) ? $headerContent : '' ?>
+
     <main>
+        <h1><?= htmlspecialchars($title) ?></h1>
         <?= $content ?? '' ?>
     </main>
 
-    <footer>
-        <p>@2025 - LiveCampus-POO</p>
-    </footer>
+    <?= isset($footerContent) ? $footerContent : '<p>@2025 - LiveCampus-POO</p>' ?>
 </body>
 </html>

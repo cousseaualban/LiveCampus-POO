@@ -1,5 +1,5 @@
 <?php 
-$title = "La page web";
+$title = $subtitle = "Liste des pages";
 ob_start();
 ?>
 
