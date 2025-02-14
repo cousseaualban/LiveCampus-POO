@@ -1,19 +1,59 @@
-nav {
-  background-color: #333;
-  padding: 10px;
-  text-align: center;
+/* Style général du body */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-nav a {
+/* Header et Navbar */
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  z-index: 1000;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.nav-link {
   color: white;
   text-decoration: none;
-  margin: 0 15px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
 }
 
-nav a:hover {
-  background-color: #575757;
-  padding: 5px 10px;
-  border-radius: 5px;
+.nav-link:hover {
+  color: #ff7f00;
+}
+
+/* Main content */
+.main-content {
+  flex-grow: 1;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.main-title {
+  font-size: 36px;
+  color: #333;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }

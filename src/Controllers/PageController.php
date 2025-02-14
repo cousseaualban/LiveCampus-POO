@@ -32,16 +32,22 @@ class PageController
             echo "Page introuvable";
             return; 
         }
-
+        $structure = $this->structureModel->getStructure();
         return $this->render("show", [
             "page" => $this->pageModel->getPageById($_GET['id']),
+            "headerContent" => $structure['header'], 
+            "footerContent" => $structure['footer'],
         ]);
     }
 
     // Création d'une page
     public function create()
     {
-        $this->render("create", null);
+        $structure = $this->structureModel->getStructure();
+        $this->render("create", [
+            "headerContent" => $structure['header'], 
+            "footerContent" => $structure['footer'],
+        ]);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $title = filter_input(INPUT_POST, 'title');
@@ -80,9 +86,12 @@ class PageController
                 echo "Remplissez correctement les champs";
             }
         }
-
+        
+        $structure = $this->structureModel->getStructure();
         $this->render("edit", [
             "page" => $this->pageModel->getPageById($_GET['id']),
+            "headerContent" => $structure['header'], 
+            "footerContent" => $structure['footer'],
         ]);
     }
 
