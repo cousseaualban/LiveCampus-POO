@@ -62,6 +62,6 @@ class AuthController
         // Suppression des données de session
         session_unset();
         session_destroy();
-        header('Location: index.php?do=auth');
+        header('Location: index.php?do=home');
     }
 }
